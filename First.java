@@ -1,5 +1,4 @@
 // Name: Sean Whittemore
-// This is a simple Java program to print some details
 
 public class First {
     public static void main(String[] args) {
