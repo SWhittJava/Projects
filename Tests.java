@@ -1,19 +1,46 @@
-import java.text.DecimalFormat;
+import java.util.Scanner;
 
 public class Tests {
-    public static void main(String[] args) {
+    // read-only private data fields
+    private int count;        // number of scores
+    private double average;   // average of scores
 
-        double testScore1 = 88.2;
-        double testScore2 = 78.9;
-        double testScore3 = 97.6;
+    // Constructor
+    public Tests() {
+        this.count = 0;
+        this.average = 0.0;
+    }
 
-        double average = (testScore1 + testScore2 + testScore3) / 3;
+    // Custom method that calculates average from user-entered test scores
+    // (loops until -1 is entered)
+    public void getAverage() {
+        Scanner sc = new Scanner(System.in);
 
-        DecimalFormat df = new DecimalFormat("#.00");
+        double sum = 0.0;
+        int localCount = 0;
 
-        System.out.println("Test score 1:   " + testScore1);
-        System.out.println("Test score 2:   " + testScore2);
-        System.out.println("Test score 3:   " + testScore3);
-        System.out.println("The average of 3 test scores is:  " + df.format(average));
+        System.out.println("Enter a test score (press -1 to quit):");
+        double score = sc.nextDouble();  // prime the loop
+
+        while (score != -1) {
+            sum += score;
+            localCount++;
+            System.out.println("Enter a test score (press -1 to quit):");
+            score = sc.nextDouble();
+        }
+
+        if (localCount > 0) {
+            this.average = sum / localCount;
+            this.count = localCount;
+        }
+        // If localCount == 0, average stays at 0.0, which can lead to NaN if displayed.
+
+        sc.close();
+    }
+
+    // Displays the results with two decimals
+    public String toString() {
+        return String.format("The average of the %d scores entered is %.2f",
+                             this.count, this.average);
     }
 }
