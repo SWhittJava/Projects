@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 public class Tests {
-    // Private data fields (some are read-only)
-    private double ave;  // average of scores (read-only)
-    private int count;   // number of scores entered (read-only)
+    // Private data fields 
+    private double ave;  // average of scores 
+    private int count;   // number of scores entered
     private int score;   // a single test score
 
     // Constructor
