@@ -1,38 +1,44 @@
-//this class tests all methods in the Calc class
-//the Calc class exposes the following methods:
-//add, subtract, multiply, divide
-//user is prompted for input
 import java.util.Scanner;
+
 public class Runner {
-    public static void main(String[] args){
-        //instantiate a Calc object
-        Calc myCalculator = new Calc();
-        //get user input for two numbers
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Please enter the first number: ");
-        double n1 = scan.nextDouble();
-        System.out.println("Please enter the second number: ");
-        double n2 = scan.nextDouble();
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        //pass the numbers to the Calc object
-        myCalculator.setNum1(n1);
-        myCalculator.setNum2(n2);
+        // Get the first number with safe input
+        double num1 = getValidDouble(scanner, "Enter first number: ");
 
-        //output from Calc instance
-        System.out.println(myCalculator);
+        // Get the second number with safe input
+        double num2 = getValidDouble(scanner, "Enter second number: ");
 
-        //examining the instance private data fields by calling get methods
-        System.out.println("Calling num1 get method: " + myCalculator.getNum1());
-        System.out.println("Calling num2 get method: " + myCalculator.getNum2());
+        // Continue with the rest of your program (e.g., use Calc methods)
+        System.out.println("You entered: " + num1 + " and " + num2);
 
-        //calling Calc methods directly
-        //can use a local variable for sum if you need that value for another calculation
-        double sum = myCalculator.add();
-        System.out.println("The sum is: " + sum);
+        // Example call if Calc.java provides an add method:
+        // double sum = Calc.add(num1, num2);
+        // System.out.println("The sum is: " + sum);
+    }
 
-        //or if you don't, then just display the difference, product and quotient
-        System.out.println("The difference is: " + myCalculator.subtract());
-        System.out.println("The product is: " + myCalculator.multiply());
-        System.out.println("The quotient is: " + myCalculator.divide());
+    /**
+     * Continuously prompts the user until a valid double is entered.
+     *
+     * @param scanner the Scanner object to read input
+     * @param prompt  the message to prompt the user
+     * @return a valid double entered by the user
+     */
+    private static double getValidDouble(Scanner scanner, String prompt) {
+        double value = 0;
+        boolean valid = false;
+        while (!valid) {
+            System.out.print(prompt);
+            if (scanner.hasNextDouble()) {
+                value = scanner.nextDouble();
+                valid = true;
+            } else {
+                // Consume the invalid input so we can try again
+                String invalid = scanner.next();
+                System.out.println("Invalid input '" + invalid + "'. Please enter a valid number.");
+            }
+        }
+        return value;
     }
 }
